@@ -712,7 +712,7 @@ def main():
             'ONR': metrics.get('ONR', 0.0),
             'REI': metrics.get('REI', 0.0)
         }
-        final_score = (sum(weights[k] * v for k, v in scores_dict.items()) / sum(weights.values())) * 40
+        final_score = (sum(weights[k] * v for k, v in scores_dict.items()) / sum(weights.values())) * 160
         final_results[name] = {'Final Score': final_score, **scores_dict}
         
         scores = [scores_dict[k] for k in labels]
@@ -731,4 +731,5 @@ def main():
         print("  - Report card and radar charts saved successfully.")
 
 if __name__ == '__main__':
+
     main()
