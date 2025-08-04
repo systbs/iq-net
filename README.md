@@ -21,8 +21,6 @@ year={2025},
 doi={10.20944/preprints202507.2512.v1}
 }
 
-*(Note: Please update the citation with the full details of the IQ-NET paper once published. The Zarvan citation is used as a placeholder.)*
-
 ---
 
 ## Features
