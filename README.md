@@ -45,7 +45,7 @@ IQ-NET for Sequences evaluates models across nine distinct, scientifically-groun
 
 The framework generates radar charts to provide an intuitive, at-a-glance understanding of each model's unique performance profile.
 
-![Combined IQ Profile](text_iq_profile_combined.jpg)
+![Combined IQ Profile](text_iq_profile_combined.png)
 *Figure: A combined view of the IQ profiles for all evaluated models, highlighting their relative strengths and weaknesses.*
 
 ---
