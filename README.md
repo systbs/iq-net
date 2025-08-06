@@ -4,8 +4,6 @@
 
 The code evaluates six neural network models—LSTM, GRU, Transformer, TCN, CNN, and Zarvan—across metrics like Reasoning (RSN), Memory (MEM), Scalability (SCL), Robustness (ROB), Generalization (GEN), and more. The results are visualized as individual and combined radar charts, saved as high-resolution PNG files.
 
-For more details, see the [IQ-NET paper](https://preprints.org/manuscript/202507.2512/v1) (Sajjadi, 2025).
-
 ## Features
 - **Rapid Profiling**: Evaluates models in minutes using CPU-based synthetic tasks, ensuring accessibility and fairness.
 - **Comprehensive Metrics**: Profiles 15 aptitudes, including:
