@@ -104,15 +104,13 @@ The models are ranked below by their **Final IQ Score**, a weighted average of a
 
 ### Individual Model Profiles
 
-\<p align="center"\>
-\<img src="image/iq\_profile\_zarvan.png" width="32%" /\>
-\<img src="image/iq\_profile\_transformer.png" width="32%" /\>
-\<img src="image/iq\_profile\_gru.png" width="32%" /\>
-\</p\>
-\<p align="center"\>
-\<img src="image/iq\_profile\_lstm.png" width="32%" /\>
-\<img src="image/iq\_profile\_cnn\_1d.png" width="32%" /\>
-\</p\>
+| Zarvan Profile | Transformer Profile | GRU Profile |
+| :---: | :---: | :---: |
+| ![Zarvan Profile](image/iq_profile_zarvan.png) | ![Transformer Profile](image/iq_profile_transformer.png) | ![GRU Profile](image/iq_profile_gru.png) |
+
+| LSTM Profile | CNN_1D Profile |
+| :---: | :---: |
+| ![LSTM Profile](image/iq_profile_lstm.png) | ![CNN_1D Profile](image/iq_profile_cnn_1d.png) |
 
 ## Methodology
 
