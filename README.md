@@ -1,28 +1,41 @@
-# IQ-NET: Holistic Aptitude Profiler for Neural Network Architectures
+# IQ-NET: A Holistic Aptitude Profiler for Neural Network Architectures
 
-**IQ-NET** is a lightweight, rapid, and comprehensive framework for profiling the intrinsic capabilities of neural network architectures. Unlike traditional benchmarks like GLUE or ImageNet, which focus on single-task performance and require extensive GPU resources, IQ-NET evaluates models across 15 theoretically grounded metrics in minutes using synthetic probe tasks. It spans text, image, audio, and video domains, revealing each model's unique "personality profile" through vivid radar charts. This project empowers researchers to select task-optimal models, identify improvement areas, and drive architectural innovation.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
+[![Paper](https://img.shields.io/badge/Paper-Preprint-b31b1b.svg)](https://www.preprints.org/manuscript/202507.2512/v1)
 
-The code evaluates five neural network models—**Zarvan**, **Transformer**, **GRU**, **LSTM**, and **1D-CNN**—across metrics like Reasoning (RSN), Memory (MEM), Scalability (SCL), Robustness (ROB), Generalization (GEN), and more. The results are visualized as individual and combined radar charts, saved as high-resolution PNG files.
+**IQ-NET** is a lightweight, rapid, and comprehensive framework for profiling the intrinsic capabilities of neural network architectures. Unlike traditional benchmarks that focus on single-task performance and require extensive GPU resources, IQ-NET evaluates models across **19 theoretically grounded metrics** in minutes using synthetic probe tasks. It spans text, image, audio, and video domains, revealing each model's unique "personality profile" through vivid radar charts. This project empowers researchers to select task-optimal models, identify improvement areas, and drive architectural innovation.
+
+The code evaluates five neural network models—**Zarvan**, **Transformer**, **GRU**, **LSTM**, and **1D-CNN**—across a wide array of aptitudes. The results are visualized as individual and combined radar charts, saved as high-resolution PNG files.
 
 ## Features
-- **Rapid Profiling**: Evaluates models in minutes using synthetic tasks, running on either CPU or GPU (CUDA).
-- **Comprehensive Metrics**: Profiles 15 aptitudes, including:
-  - **RSN**: Reasoning (stateful logical processing)
-  - **MEM**: Memory (information recall)
-  - **SCL**: Scalability (handling increasing sequence lengths)
-  - **ROB**: Robustness (performance under noise)
-  - **GEN**: Generalization (performance on unseen data)
-  - **HEAD**: Learning Headroom (remaining learning potential)
-  - **PAR**: Parameter Efficiency (fewer parameters)
-  - **INTP**: Interpretability (focus on relevant inputs)
-  - **UNC**: Uncertainty (appropriate uncertainty on ambiguous inputs)
-  - **CONT**: Continual Learning (knowledge retention across tasks)
-  - **SPF**: Spatial Focus (feature localization in images)
-  - **PAT**: Pattern Invariance (recognition despite transformations)
-  - **FREQ**: Frequency Detection (identifying frequencies in audio)
-  - **RHY**: Rhythm Comprehension (classifying temporal patterns)
-  - **TRAJ**: Trajectory Prediction (extrapolating object motion in videos)
-- **Visualization**: Generates insightful radar charts for each model and a combined comparison.
+- **Rapid Profiling**: Evaluates models in minutes, running on either CPU or GPU (CUDA).
+- **Comprehensive Metrics**: Profiles 19 aptitudes to create a holistic view of a model's capabilities:
+  - **Core Aptitudes**:
+    - **PAR** (Parameter Score): Architectural efficiency.
+    - **SCL** (Scalability Score): Performance scaling with sequence length.
+    - **MEM** (Memory Score): Information recall over a noisy channel.
+    - **RSN** (Reasoning Score): Stateful, algorithmic logical processing.
+  - **Learning & Robustness**:
+    - **GEN** (Generalization Score): Performance on unseen data, penalizing overfitting.
+    - **ROB** (Robustness Score): Performance under input noise.
+    - **HEAD** (Learning Headroom): Remaining potential to learn from the slope of the loss curve.
+  - **Advanced Traits**:
+    - **INTP** (Interpretability Score): Focus on relevant (signal) vs. irrelevant (noise) inputs.
+    - **UNC** (Uncertainty Score): Expression of uncertainty on ambiguous inputs.
+    - **CONT** (Continual Learning Score): Ability to resist catastrophic forgetting.
+  - **Visual Probes**:
+    - **SPF** (Spatial Focus Score): Locating features in a noisy 2D space.
+    - **PAT** (Pattern Invariance Score): Recognition despite rotation, scaling, and translation.
+    - **TRAJ** (Trajectory Prediction Score): Extrapolating object motion in video frames.
+  - **Audio Probes**:
+    - **FREQ** (Frequency Detection Score): Identifying specific frequencies in a noisy signal.
+    - **RHY** (Rhythm Comprehension Score): Classifying temporal audio patterns.
+    - **TXT** (Texture Detection Score): Distinguishing complex sound textures (formants).
+    - **ENGY** (Energy Envelope Score): Recognizing amplitude modulation patterns.
+    - **PRDY** (Prosody Detection Score): Classifying pitch contours over time.
+    - **FRMN** (Formant Dynamics Score): Tracking the movement of formants in a signal.
+- **Rich Visualization**: Generates insightful radar charts for each model and a combined comparison chart.
 - **Reproducible**: Includes seed setting for consistent results and synthetic datasets for bias-free evaluation.
 - **Open Source**: All code and synthetic probe datasets follow FAIR data principles.
 
@@ -36,9 +49,9 @@ The code evaluates five neural network models—**Zarvan**, **Transformer**, **G
 Install the required Python libraries using:
 ```bash
 pip install torch numpy scipy pandas matplotlib opencv-python
-````
+```
 
-**Note**: `opencv-python` is optional but highly recommended for the image and video probe tasks. If not installed, the script gracefully handles its absence with a fallback mechanism, which may slightly reduce the complexity of the visual probes.
+**Note**: `opencv-python` is optional but highly recommended for the image and video probe tasks. If not installed, the script gracefully handles its absence with a fallback mechanism, though this may reduce the complexity of the visual probes.
 
 ### Clone the Repository
 
@@ -50,82 +63,84 @@ cd iq-net
 ## Usage
 
 1.  **Run the Profiler**:
-    Execute the main script to profile the five models (Zarvan, Transformer, GRU, LSTM, CNN\_1D):
+    Execute the main script to profile the five models (Zarvan, Transformer, GRU, LSTM, CNN_1D):
 
     ```bash
     python benchmark.py
     ```
 
     The script will:
-
-      - Profile each model across the 15 metrics.
+      - Profile each model across all 19 metrics.
       - Output detailed logs to the console, including per-metric scores and sub-level accuracies.
-      - Generate radar charts saved as PNG files in the project directory.
+      - Generate and save radar charts as PNG files in the project directory.
 
 2.  **Output Files**:
-
-      - **Individual Radar Charts**: `iq_profile_<model>.png` (e.g., `iq_profile_zarvan.png`).
+      - **Individual Radar Charts**: `iq_profile_<model_name>.png` (e.g., `iq_profile_zarvan.png`).
       - **Combined Radar Chart**: `iq_net_radar_comparison.png`.
-      - **Console Output**: A markdown-formatted table summarizing the results, including a weighted **Final IQ Score**.
+      - **Console Output**: A markdown-formatted table summarizing the final results, including a weighted **Final IQ Score**.
 
 ## Results & Visualization
 
-IQ-NET reveals distinct architectural "personalities," highlighting strengths and weaknesses that are not apparent from single-task benchmarks. The final scores show a clear hierarchy in holistic aptitude among the tested models.
+IQ-NET reveals distinct architectural "personalities," highlighting strengths and weaknesses that are not apparent from single-task benchmarks. The final scores, based on the corrected and expanded framework, show a clear hierarchy in holistic aptitude.
 
-### Final IQ-NET Report
+### Final IQ-NET Report (Corrected & Expanded)
 
-The models are ranked below by their **Final IQ Score**, a weighted average of all 15 metrics designed to reflect a balanced, holistic aptitude.
+The models are ranked by their **Final IQ Score**, a weighted average of all 19 metrics designed to reflect a balanced, holistic aptitude.
 
-| Metric                      |   Zarvan |   Transformer |     GRU |    LSTM |   CNN\_1D |
-|:----------------------------|---------:|--------------:|--------:|--------:|---------:|
-| Parameter\_Score             |   0.8892 |        0.9311 |  0.8407 |  0.8017 |   0.9497 |
-| Scalability\_Score           |   0.9582 |        0.9857 |  0.9927 |  0.9931 |   0.9925 |
-| Memory\_Score                |   1      |        1      |  0.9808 |  0.9586 |   0.8111 |
-| Reasoning\_Score             |   0.7502 |        0.3388 |  0.6967 |  0.5434 |   0.137  |
-| Generalization\_Score        |   1      |        1      |  0.9825 |  0.9608 |   0.8042 |
-| Robustness\_Score            |   0.7631 |        0.8914 |  0.2427 |  0.3013 |   0.3822 |
-| Learning\_Headroom           |   0.5252 |        0.5126 |  0.5374 |  0.5977 |   0.5265 |
-| Interpretability\_Score      |   0.9617 |        0.9872 |  0.5054 |  0.2403 |   0.9983 |
-| Uncertainty\_Score           |   0.9196 |        0.9473 |  0.9983 |  0.999  |   0.9966 |
-| Continual\_Learning\_Score    |   0.8125 |        0.7027 |  1      |  0.9211 |   0.68   |
-| Spatial\_Focus\_Score         |   0.5261 |        0.5064 |  0.4938 |  0.4947 |   0.5163 |
-| Pattern\_Invariance\_Score    |   0.5681 |        0.5402 |  0.4777 |  0.5145 |   0.529  |
-| Frequency\_Detection\_Score   |   0.9911 |        0.7232 |  0.2746 |  0.2701 |   0.7065 |
-| Rhythm\_Comprehension\_Score  |   0.9777 |        0.6674 |  0.3069 |  0.3393 |   0.6518 |
-| Trajectory\_Prediction\_Score |   0.6088 |        0.6088 |  0.6367 |  0.6248 |   0.6334 |
-| **Final\_IQ\_Score** |  **81.77** |    **72.44** | **65.80** | **62.87** |  **62.75** |
+| Metric | Zarvan | Transformer | GRU | LSTM | CNN_1D |
+|:---|---:|---:|---:|---:|---:|
+| **Parameter_Score** | 0.7079 | 0.8242 | 0.8249 | 0.7823 | **0.9403** |
+| **Scalability_Score** | 0.9577 | 0.9856 | 0.9932 | **0.9932** | 0.9930 |
+| **Memory_Score** | **1.0000** | **1.0000** | 0.9981 | 0.9933 | 0.9036 |
+| **Reasoning_Score** | 0.9713 | 0.5181 | **0.9797** | 0.8076 | 0.1413 |
+| **Generalization_Score** | **1.0000** | **1.0000** | 0.9983 | 0.9942 | 0.9008 |
+| **Robustness_Score** | 0.8094 | **0.8238** | 0.0672 | 0.1732 | 0.4586 |
+| **Learning_Headroom** | 0.4884 | 0.5238 | **0.5741** | 0.5642 | 0.5471 |
+| **Interpretability_Score** | 0.9705 | **0.9776** | 0.2517 | 0.3631 | 0.0000 |
+| **Uncertainty_Score** | 0.9039 | 0.9126 | 0.9985 | **0.9994** | 0.9820 |
+| **Continual_Learning_Score** | 0.8125 | 0.9286 | **1.0000** | **1.0000** | 0.8163 |
+| **Spatial_Focus_Score** | 0.5500 | 0.5383 | 0.5387 | **0.5906** | 0.5007 |
+| **Pattern_Invariance_Score** | **0.5949** | 0.5681 | 0.5402 | 0.5257 | 0.4754 |
+| **Frequency_Detection_Score** | **1.0000** | 0.9955 | 0.9955 | 0.9464 | 0.8638 |
+| **Rhythm_Comprehension_Score** | **1.0000** | 0.9643 | **1.0000** | **1.0000** | 0.8661 |
+| **Texture_Detection_Score** | **1.0000** | **1.0000** | **1.0000** | **1.0000** | 0.9554 |
+| **Energy_Envelope_Score** | **1.0000** | **1.0000** | 0.9821 | 0.9408 | 0.9475 |
+| **Prosody_Detection_Score** | **0.9821** | 0.9152 | 0.9330 | 0.9241 | 0.7946 |
+| **Formant_Dynamics_Score** | **1.0000** | **1.0000** | **1.0000** | **1.0000** | **1.0000** |
+| **Trajectory_Prediction_Score** | 0.6281 | 0.6262 | 0.6266 | **0.6297** | 0.6171 |
+| **Final_IQ_Score** | **86.97** | 81.74 | 81.24 | 79.65 | 67.59 |
 
 ### Key Insights:
 
-  - **Zarvan** emerges as the top-performing model with a commanding **Final IQ Score of 81.77**. It demonstrates exceptional aptitude in high-level reasoning (`0.7502`), perfect memory and generalization, and near-perfect performance in audio comprehension tasks.
-  - **Transformer** shows a strong profile, excelling in memory, generalization, and robustness. However, its significantly lower reasoning score (`0.3388`) compared to Zarvan and GRU highlights a key trade-off.
-  - **GRU** and **LSTM** display classic RNN strengths. GRU, in particular, achieves a perfect score in Continual Learning (`1.0000`) and a high Reasoning score (`0.6967`). Both, however, struggle significantly with the audio frequency and rhythm tasks.
-  - **CNN\_1D** shows a specialized profile. While it lags in abstract tasks like reasoning and memory, it achieves the highest scores in parameter efficiency and interpretability, making it a strong candidate for resource-constrained applications where model transparency is critical.
+-   **Zarvan** is the definitive top performer with a **Final IQ Score of 86.97**. It showcases a uniquely balanced profile, achieving perfect scores in Memory, Generalization, and most audio tasks while maintaining top-tier performance in algorithmic Reasoning.
+-   **GRU** emerges as a reasoning specialist, achieving the highest **Reasoning Score (0.9797)** and a perfect score in **Continual Learning**. However, this comes at the cost of extremely poor robustness.
+-   **Transformer** is a robust generalist, achieving the highest **Robustness Score (0.8238)** and perfect Memory/Generalization. Its main trade-off is a significantly lower aptitude for algorithmic reasoning compared to Zarvan and the RNNs.
+-   **CNN_1D** has a highly specialized profile. It is the most parameter-efficient model (**0.9403**) but is fundamentally incapable of algorithmic reasoning (**0.1413**) and has zero interpretability according to the probe, making it a "black box" despite its simplicity.
 
-### Individual Model Profiles
+### Individual & Combined Model Profiles
+
+*(To display these images, create a folder named `images` in your repository's root directory and place the generated PNG files there.)*
 
 | Zarvan Profile | Transformer Profile | GRU Profile |
 | :---: | :---: | :---: |
-| ![Zarvan Profile](image/iq_profile_zarvan.png) | ![Transformer Profile](image/iq_profile_transformer.png) | ![GRU Profile](image/iq_profile_gru.png) |
+| ![Zarvan Profile](./images/iq_profile_zarvan.jpg) | ![Transformer Profile](./images/iq_profile_transformer.jpg) | ![GRU Profile](./images/iq_profile_gru.jpg) |
 
-| LSTM Profile | CNN_1D Profile |
-| :---: | :---: |
-| ![LSTM Profile](image/iq_profile_lstm.png) | ![CNN_1D Profile](image/iq_profile_cnn_1d.png) |
+| LSTM Profile | CNN_1D Profile | Combined Comparison |
+| :---: | :---: | :---: |
+| ![LSTM Profile](./images/iq_profile_lstm.jpg) | ![CNN_1D Profile](./images/iq_profile_cnn_1d.jpg) | ![Combined Profile](./images/iq_net_radar_comparison.jpg) |
 
 ## Methodology
 
-IQ-NET uses synthetic probe tasks to evaluate models across four domains:
+IQ-NET uses synthetic probe tasks to evaluate models across four domains. To ensure a fair comparison of the core architectures, standardized perception heads (a ViT-style patch embedding for images and a frame-based 1D-CNN for audio/video) are used to convert multimodal data into a unified sequence format. This isolates the evaluation to the model's ability to process and reason with these sequences, rather than its built-in perceptual capabilities.
 
-  - **Text**: Memory and reasoning tasks with synthetic sequences (vocab\_size=100, sequence\_length=128, num\_samples=1200).
-  - **Image**: Spatial focus and pattern invariance tasks using 32x32 images.
-  - **Audio**: Frequency detection and rhythm comprehension tasks with 2048-length signals.
-  - **Video**: Trajectory prediction tasks using 16-frame 32x32 videos.
-
-To ensure a fair comparison of the core architectures, standardized perception heads (a patch-based embedding layer for images and a frame-based embedding layer for audio) are used to convert multimodal data into sequences. This isolates the evaluation to the model's ability to process and reason with these sequences, rather than its built-in perceptual capabilities.
+-   **Text**: Memory and reasoning tasks using synthetic sequences.
+-   **Image**: Spatial focus and pattern invariance tasks using 32x32 images.
+-   **Audio**: A suite of 6 tasks (frequency, rhythm, texture, etc.) using 2048-length signals.
+-   **Video**: Trajectory prediction tasks using 16-frame 32x32 videos.
 
 ## Contributing
 
-Contributions are welcome\! Please submit issues or pull requests for bug fixes, feature additions, or documentation improvements. Follow these steps:
+Contributions are welcome! Please submit issues or pull requests for bug fixes, feature additions, or documentation improvements.
 
 1.  Fork the repository.
 2.  Create a feature branch (`git checkout -b feature/your-feature`).
@@ -135,7 +150,7 @@ Contributions are welcome\! Please submit issues or pull requests for bug fixes,
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
 
 ## Contact
 
