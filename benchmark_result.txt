@@ -1,323 +1,273 @@
-Starting IQ-NET v2+ Profiler on device: cpu
---- Profiling LSTM ---
+Starting IQ-NET Profiler on device: cuda
+--- Profiling Zarvan ---
 Running static tests...
-  > Parameter_Score calculated: 0.8070
-  > Scalability_Score calculated: 0.5825
+  > Parameter_Score calculated: 0.8892
+  > Scalability_Score calculated: 0.9582
 Running probe training and evaluation...
-  > Memory Accuracy per Repetition Level: {1: 0.9917, 2: 0.9833, 3: 0.975, 5: 0.9875, 8: 0.9708}
-  > Memory_Score (Weighted) calculated: 0.9842
-  > Reasoning Accuracy per Difficulty Level: {1: 0.6876, 2: 0.9932, 3: 0.5825}
-  > Reasoning_Score (Weighted) calculated: 0.6141
-  > Generalization_Score calculated: 0.9817
+  > Memory Accuracy per Repetition Level: {1: 1.0, 2: 1.0, 3: 1.0, 5: 1.0, 8: 1.0}
+  > Memory_Score (Weighted) calculated: 1.0000
+  > Reasoning Accuracy per Difficulty Level: {1: 0.9853, 2: 0.9887, 3: 0.6412}
+  > Reasoning_Score (Weighted) calculated: 0.7502
+  > Generalization_Score calculated: 1.0000
   > Robustness Score per Noise Level:
-    - Noise 5%: 0.5150
-    - Noise 15%: 0.2783
-    - Noise 30%: 0.1855
-  > Learning_Headroom calculated: 0.5810
-  > Interpretability_Score calculated: 0.2403
+    - Noise 5%: 0.7772
+    - Noise 15%: 0.7592
+    - Noise 30%: 0.7611
+  > Learning_Headroom calculated: 0.5252
+  > Interpretability_Score calculated: 0.9617
 Running advanced probes...
-  > Uncertainty_Score calculated: 0.9992
-  > Continual_Learning_Score calculated: 0.8421
+  > Uncertainty_Score calculated: 0.9196
+  > Continual_Learning_Score calculated: 0.8125
 Running Image IQ Probes...
   > Calculating Spatial Focus Score...
-    - Level 1 (easy) Score: 0.1619
-    - Level 2 (medium) Score: 0.0718
-    - Level 3 (hard) Score: 0.0527
-  > Final Spatial_Focus_Score (Weighted) calculated: 0.0738
+    - Level 1 (easy) Score: 0.7242
+    - Level 2 (medium) Score: 0.4948
+    - Level 3 (hard) Score: 0.4923
+  > Final Spatial_Focus_Score (Weighted) calculated: 0.5261
   > Calculating Pattern Invariance Score...
-    - Level 1 (translation) Accuracy: 0.0000
-    - Level 2 (scale) Accuracy: 0.0000
-    - Level 3 (rotation) Accuracy: 0.0000
-  > Final Pattern_Invariance_Score (Weighted) calculated: 0.0000
+    - Level 1 (translation) Accuracy: 0.5703
+    - Level 2 (scale) Accuracy: 0.5469
+    - Level 3 (rotation) Accuracy: 0.5781
+  > Final Pattern_Invariance_Score (Weighted) calculated: 0.5681
 Running Audio IQ Probes...
   > Calculating Frequency Detection Score...
-    - Level 1 (easy) Accuracy: 0.2578
-    - Level 2 (medium) Accuracy: 0.2500
-    - Level 3 (hard) Accuracy: 0.1953
-  > Final Frequency_Detection_Score (Weighted) calculated: 0.2199
+    - Level 1 (easy) Accuracy: 1.0000
+    - Level 2 (medium) Accuracy: 1.0000
+    - Level 3 (hard) Accuracy: 0.9844
+  > Final Frequency_Detection_Score (Weighted) calculated: 0.9911
   > Calculating Rhythm Comprehension Score...
-    - Level 1 (easy) Accuracy: 0.6406
-    - Level 2 (medium) Accuracy: 0.5000
-    - Level 3 (hard) Accuracy: 0.3359
-  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.4263
+    - Level 1 (easy) Accuracy: 1.0000
+    - Level 2 (medium) Accuracy: 1.0000
+    - Level 3 (hard) Accuracy: 0.9609
+  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.9777
 Running Video IQ Probes...
   > Calculating Trajectory Prediction Score...
-    - Level 1 (linear) Score: 0.0032
-    - Level 2 (parabolic) Score: 0.0032
-    - Level 3 (bounce) Score: 0.1086
-  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.0634
+    - Level 1 (linear) Score: 0.5801
+    - Level 2 (parabolic) Score: 0.7477
+    - Level 3 (bounce) Score: 0.5465
+  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.6088
+Profile for Zarvan complete.
+
+--- Profiling LSTM ---
+Running static tests...
+  > Parameter_Score calculated: 0.8017
+  > Scalability_Score calculated: 0.9931
+Running probe training and evaluation...
+  > Memory Accuracy per Repetition Level: {1: 0.9625, 2: 0.9417, 3: 0.975, 5: 0.95, 8: 0.975}
+  > Memory_Score (Weighted) calculated: 0.9586
+  > Reasoning Accuracy per Difficulty Level: {1: 0.685, 2: 0.9453, 3: 0.5136}
+  > Reasoning_Score (Weighted) calculated: 0.5434
+  > Generalization_Score calculated: 0.9608
+  > Robustness Score per Noise Level:
+    - Noise 5%: 0.5313
+    - Noise 15%: 0.3248
+    - Noise 30%: 0.2090
+  > Learning_Headroom calculated: 0.5977
+  > Interpretability_Score calculated: 0.2403
+Running advanced probes...
+  > Uncertainty_Score calculated: 0.9990
+  > Continual_Learning_Score calculated: 0.9211
+Running Image IQ Probes...
+  > Calculating Spatial Focus Score...
+    - Level 1 (easy) Score: 0.6267
+    - Level 2 (medium) Score: 0.4693
+    - Level 3 (hard) Score: 0.4743
+  > Final Spatial_Focus_Score (Weighted) calculated: 0.4947
+  > Calculating Pattern Invariance Score...
+    - Level 1 (translation) Accuracy: 0.4609
+    - Level 2 (scale) Accuracy: 0.4922
+    - Level 3 (rotation) Accuracy: 0.5391
+  > Final Pattern_Invariance_Score (Weighted) calculated: 0.5145
+Running Audio IQ Probes...
+  > Calculating Frequency Detection Score...
+    - Level 1 (easy) Accuracy: 0.2969
+    - Level 2 (medium) Accuracy: 0.2812
+    - Level 3 (hard) Accuracy: 0.2578
+  > Final Frequency_Detection_Score (Weighted) calculated: 0.2701
+  > Calculating Rhythm Comprehension Score...
+    - Level 1 (easy) Accuracy: 0.3125
+    - Level 2 (medium) Accuracy: 0.4062
+    - Level 3 (hard) Accuracy: 0.3125
+  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.3393
+Running Video IQ Probes...
+  > Calculating Trajectory Prediction Score...
+    - Level 1 (linear) Score: 0.5830
+    - Level 2 (parabolic) Score: 0.7782
+    - Level 3 (bounce) Score: 0.5586
+  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.6248
 Profile for LSTM complete.
 
 --- Profiling GRU ---
 Running static tests...
-  > Parameter_Score calculated: 0.8466
-  > Scalability_Score calculated: 0.5859
+  > Parameter_Score calculated: 0.8407
+  > Scalability_Score calculated: 0.9927
 Running probe training and evaluation...
-  > Memory Accuracy per Repetition Level: {1: 0.9958, 2: 0.9958, 3: 0.9958, 5: 0.975, 8: 0.9917}
-  > Memory_Score (Weighted) calculated: 0.9928
-  > Reasoning Accuracy per Difficulty Level: {1: 1.0, 2: 1.0, 3: 0.7181}
-  > Reasoning_Score (Weighted) calculated: 0.8120
-  > Generalization_Score calculated: 0.9908
+  > Memory Accuracy per Repetition Level: {1: 0.9792, 2: 0.9792, 3: 0.9792, 5: 0.9875, 8: 0.9875}
+  > Memory_Score (Weighted) calculated: 0.9808
+  > Reasoning Accuracy per Difficulty Level: {1: 0.9997, 2: 0.9939, 3: 0.5497}
+  > Reasoning_Score (Weighted) calculated: 0.6967
+  > Generalization_Score calculated: 0.9825
   > Robustness Score per Noise Level:
-    - Noise 5%: 0.3629
-    - Noise 15%: 0.1819
-    - Noise 30%: 0.0960
-  > Learning_Headroom calculated: 0.5581
-  > Interpretability_Score calculated: 0.2403
+    - Noise 5%: 0.4505
+    - Noise 15%: 0.2657
+    - Noise 30%: 0.1582
+  > Learning_Headroom calculated: 0.5374
+  > Interpretability_Score calculated: 0.5054
 Running advanced probes...
-  > Uncertainty_Score calculated: 0.9978
-  > Continual_Learning_Score calculated: 0.7455
+  > Uncertainty_Score calculated: 0.9983
+  > Continual_Learning_Score calculated: 1.0000
 Running Image IQ Probes...
   > Calculating Spatial Focus Score...
-    - Level 1 (easy) Score: 0.1629
-    - Level 2 (medium) Score: 0.0722
-    - Level 3 (hard) Score: 0.0531
-  > Final Spatial_Focus_Score (Weighted) calculated: 0.0743
+    - Level 1 (easy) Score: 0.6262
+    - Level 2 (medium) Score: 0.4673
+    - Level 3 (hard) Score: 0.4739
+  > Final Spatial_Focus_Score (Weighted) calculated: 0.4938
   > Calculating Pattern Invariance Score...
-    - Level 1 (translation) Accuracy: 0.0000
-    - Level 2 (scale) Accuracy: 0.0000
-    - Level 3 (rotation) Accuracy: 0.0000
-  > Final Pattern_Invariance_Score (Weighted) calculated: 0.0000
+    - Level 1 (translation) Accuracy: 0.4219
+    - Level 2 (scale) Accuracy: 0.4453
+    - Level 3 (rotation) Accuracy: 0.5078
+  > Final Pattern_Invariance_Score (Weighted) calculated: 0.4777
 Running Audio IQ Probes...
   > Calculating Frequency Detection Score...
-    - Level 1 (easy) Accuracy: 0.2266
-    - Level 2 (medium) Accuracy: 0.1719
-    - Level 3 (hard) Accuracy: 0.2734
-  > Final Frequency_Detection_Score (Weighted) calculated: 0.2377
+    - Level 1 (easy) Accuracy: 0.2969
+    - Level 2 (medium) Accuracy: 0.2812
+    - Level 3 (hard) Accuracy: 0.2656
+  > Final Frequency_Detection_Score (Weighted) calculated: 0.2746
   > Calculating Rhythm Comprehension Score...
-    - Level 1 (easy) Accuracy: 0.0000
-    - Level 2 (medium) Accuracy: 0.0000
-    - Level 3 (hard) Accuracy: 0.0000
-  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.0000
+    - Level 1 (easy) Accuracy: 0.3672
+    - Level 2 (medium) Accuracy: 0.3125
+    - Level 3 (hard) Accuracy: 0.2891
+  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.3069
 Running Video IQ Probes...
   > Calculating Trajectory Prediction Score...
-    - Level 1 (linear) Score: 0.0078
-    - Level 2 (parabolic) Score: 0.0057
-    - Level 3 (bounce) Score: 0.0798
-  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.0484
+    - Level 1 (linear) Score: 0.5821
+    - Level 2 (parabolic) Score: 0.7898
+    - Level 3 (bounce) Score: 0.5738
+  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.6367
 Profile for GRU complete.
 
 --- Profiling Transformer ---
 Running static tests...
   > Parameter_Score calculated: 0.9311
-  > Scalability_Score calculated: 0.6154
+  > Scalability_Score calculated: 0.9857
 Running probe training and evaluation...
   > Memory Accuracy per Repetition Level: {1: 1.0, 2: 1.0, 3: 1.0, 5: 1.0, 8: 1.0}
   > Memory_Score (Weighted) calculated: 1.0000
-  > Reasoning Accuracy per Difficulty Level: {1: 0.6694, 2: 0.5507, 3: 0.4509}
-  > Reasoning_Score (Weighted) calculated: 0.2991
+  > Reasoning Accuracy per Difficulty Level: {1: 0.6633, 2: 0.5885, 3: 0.4853}
+  > Reasoning_Score (Weighted) calculated: 0.3388
   > Generalization_Score calculated: 1.0000
   > Robustness Score per Noise Level:
-    - Noise 5%: 0.9030
-    - Noise 15%: 0.8936
-    - Noise 30%: 0.8771
-  > Learning_Headroom calculated: 0.4961
-  > Interpretability_Score calculated: 0.9606
+    - Noise 5%: 0.9045
+    - Noise 15%: 0.8952
+    - Noise 30%: 0.8844
+  > Learning_Headroom calculated: 0.5126
+  > Interpretability_Score calculated: 0.9872
 Running advanced probes...
-  > Uncertainty_Score calculated: 0.9306
-  > Continual_Learning_Score calculated: 0.7222
+  > Uncertainty_Score calculated: 0.9473
+  > Continual_Learning_Score calculated: 0.7027
 Running Image IQ Probes...
   > Calculating Spatial Focus Score...
-    - Level 1 (easy) Score: 0.0875
-    - Level 2 (medium) Score: 0.0390
-    - Level 3 (hard) Score: 0.0316
-  > Final Spatial_Focus_Score (Weighted) calculated: 0.0417
+    - Level 1 (easy) Score: 0.6793
+    - Level 2 (medium) Score: 0.4820
+    - Level 3 (hard) Score: 0.4753
+  > Final Spatial_Focus_Score (Weighted) calculated: 0.5064
   > Calculating Pattern Invariance Score...
-    - Level 1 (translation) Accuracy: 0.4453
-    - Level 2 (scale) Accuracy: 0.5469
-    - Level 3 (rotation) Accuracy: 0.4219
-  > Final Pattern_Invariance_Score (Weighted) calculated: 0.4609
+    - Level 1 (translation) Accuracy: 0.5469
+    - Level 2 (scale) Accuracy: 0.4609
+    - Level 3 (rotation) Accuracy: 0.5781
+  > Final Pattern_Invariance_Score (Weighted) calculated: 0.5402
 Running Audio IQ Probes...
   > Calculating Frequency Detection Score...
-    - Level 1 (easy) Accuracy: 0.2656
-    - Level 2 (medium) Accuracy: 0.2656
-    - Level 3 (hard) Accuracy: 0.3594
-  > Final Frequency_Detection_Score (Weighted) calculated: 0.3192
+    - Level 1 (easy) Accuracy: 1.0000
+    - Level 2 (medium) Accuracy: 0.7500
+    - Level 3 (hard) Accuracy: 0.6406
+  > Final Frequency_Detection_Score (Weighted) calculated: 0.7232
   > Calculating Rhythm Comprehension Score...
-    - Level 1 (easy) Accuracy: 0.3203
-    - Level 2 (medium) Accuracy: 0.3359
-    - Level 3 (hard) Accuracy: 0.2031
-  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.2578
+    - Level 1 (easy) Accuracy: 0.9062
+    - Level 2 (medium) Accuracy: 0.8984
+    - Level 3 (hard) Accuracy: 0.4922
+  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.6674
 Running Video IQ Probes...
   > Calculating Trajectory Prediction Score...
-    - Level 1 (linear) Score: 0.0108
-    - Level 2 (parabolic) Score: 0.0180
-    - Level 3 (bounce) Score: 0.0504
-  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.0355
+    - Level 1 (linear) Score: 0.5795
+    - Level 2 (parabolic) Score: 0.7314
+    - Level 3 (bounce) Score: 0.5549
+  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.6088
 Profile for Transformer complete.
 
---- Profiling TCN ---
+--- Profiling CNN_1D ---
 Running static tests...
-  > Parameter_Score calculated: 0.8410
-  > Scalability_Score calculated: 0.7876
+  > Parameter_Score calculated: 0.9497
+  > Scalability_Score calculated: 0.9925
 Running probe training and evaluation...
-  > Memory Accuracy per Repetition Level: {1: 1.0, 2: 0.9958, 3: 0.9958, 5: 0.9958, 8: 0.9917}
-  > Memory_Score (Weighted) calculated: 0.9969
-  > Reasoning Accuracy per Difficulty Level: {1: 0.6122, 2: 0.4921, 3: 0.3776}
-  > Reasoning_Score (Weighted) calculated: 0.2019
-  > Generalization_Score calculated: 0.9958
+  > Memory Accuracy per Repetition Level: {1: 0.8708, 2: 0.7708, 3: 0.7708, 5: 0.8083, 8: 0.8}
+  > Memory_Score (Weighted) calculated: 0.8111
+  > Reasoning Accuracy per Difficulty Level: {1: 0.5437, 2: 0.4405, 3: 0.3532}
+  > Reasoning_Score (Weighted) calculated: 0.1370
+  > Generalization_Score calculated: 0.8042
   > Robustness Score per Noise Level:
-    - Noise 5%: 0.6907
-    - Noise 15%: 0.5140
-    - Noise 30%: 0.3332
-  > Learning_Headroom calculated: 0.5462
-  > Interpretability_Score calculated: 0.4792
+    - Noise 5%: 0.4746
+    - Noise 15%: 0.4018
+    - Noise 30%: 0.3384
+  > Learning_Headroom calculated: 0.5265
+  > Interpretability_Score calculated: 0.9983
 Running advanced probes...
-  > Uncertainty_Score calculated: 0.9793
-  > Continual_Learning_Score calculated: 0.8421
+  > Uncertainty_Score calculated: 0.9966
+  > Continual_Learning_Score calculated: 0.6800
 Running Image IQ Probes...
   > Calculating Spatial Focus Score...
-    - Level 1 (easy) Score: 0.1576
-    - Level 2 (medium) Score: 0.0717
-    - Level 3 (hard) Score: 0.0522
-  > Final Spatial_Focus_Score (Weighted) calculated: 0.0728
+    - Level 1 (easy) Score: 0.6637
+    - Level 2 (medium) Score: 0.4906
+    - Level 3 (hard) Score: 0.4923
+  > Final Spatial_Focus_Score (Weighted) calculated: 0.5163
   > Calculating Pattern Invariance Score...
-    - Level 1 (translation) Accuracy: 0.0000
-    - Level 2 (scale) Accuracy: 0.0000
-    - Level 3 (rotation) Accuracy: 0.0000
-  > Final Pattern_Invariance_Score (Weighted) calculated: 0.0000
+    - Level 1 (translation) Accuracy: 0.4375
+    - Level 2 (scale) Accuracy: 0.6016
+    - Level 3 (rotation) Accuracy: 0.5156
+  > Final Pattern_Invariance_Score (Weighted) calculated: 0.5290
 Running Audio IQ Probes...
   > Calculating Frequency Detection Score...
-    - Level 1 (easy) Accuracy: 0.0000
-    - Level 2 (medium) Accuracy: 0.0000
-    - Level 3 (hard) Accuracy: 0.0000
-  > Final Frequency_Detection_Score (Weighted) calculated: 0.0000
+    - Level 1 (easy) Accuracy: 0.9922
+    - Level 2 (medium) Accuracy: 0.7734
+    - Level 3 (hard) Accuracy: 0.6016
+  > Final Frequency_Detection_Score (Weighted) calculated: 0.7065
   > Calculating Rhythm Comprehension Score...
-    - Level 1 (easy) Accuracy: 0.0000
-    - Level 2 (medium) Accuracy: 0.0000
-    - Level 3 (hard) Accuracy: 0.0000
-  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.0000
+    - Level 1 (easy) Accuracy: 0.7188
+    - Level 2 (medium) Accuracy: 0.7656
+    - Level 3 (hard) Accuracy: 0.5781
+  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.6518
 Running Video IQ Probes...
   > Calculating Trajectory Prediction Score...
-    - Level 1 (linear) Score: 0.0070
-    - Level 2 (parabolic) Score: 0.0033
-    - Level 3 (bounce) Score: 0.0837
-  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.0498
-Profile for TCN complete.
-
---- Profiling CNN ---
-Running static tests...
-  > Parameter_Score calculated: 0.9245
-  > Scalability_Score calculated: 0.9221
-Running probe training and evaluation...
-  > Memory Accuracy per Repetition Level: {1: 0.9958, 2: 0.9833, 3: 0.9958, 5: 0.9792, 8: 0.9958}
-  > Memory_Score (Weighted) calculated: 0.9903
-  > Reasoning Accuracy per Difficulty Level: {1: 0.549, 2: 0.4393, 3: 0.3653}
-  > Reasoning_Score (Weighted) calculated: 0.1462
-  > Generalization_Score calculated: 0.9900
-  > Robustness Score per Noise Level:
-    - Noise 5%: 0.6579
-    - Noise 15%: 0.4898
-    - Noise 30%: 0.3594
-  > Learning_Headroom calculated: 0.5111
-  > Interpretability_Score calculated: 0.0000
-Running advanced probes...
-  > Uncertainty_Score calculated: 0.9967
-  > Continual_Learning_Score calculated: 0.9268
-Running Image IQ Probes...
-  > Calculating Spatial Focus Score...
-    - Level 1 (easy) Score: 0.1587
-    - Level 2 (medium) Score: 0.0712
-    - Level 3 (hard) Score: 0.0519
-  > Final Spatial_Focus_Score (Weighted) calculated: 0.0727
-  > Calculating Pattern Invariance Score...
-    - Level 1 (translation) Accuracy: 0.0000
-    - Level 2 (scale) Accuracy: 0.0000
-    - Level 3 (rotation) Accuracy: 0.0000
-  > Final Pattern_Invariance_Score (Weighted) calculated: 0.0000
-Running Audio IQ Probes...
-  > Calculating Frequency Detection Score...
-    - Level 1 (easy) Accuracy: 0.2656
-    - Level 2 (medium) Accuracy: 0.2578
-    - Level 3 (hard) Accuracy: 0.2422
-  > Final Frequency_Detection_Score (Weighted) calculated: 0.2500
-  > Calculating Rhythm Comprehension Score...
-    - Level 1 (easy) Accuracy: 0.2188
-    - Level 2 (medium) Accuracy: 0.3750
-    - Level 3 (hard) Accuracy: 0.3359
-  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.3304
-Running Video IQ Probes...
-  > Calculating Trajectory Prediction Score...
-    - Level 1 (linear) Score: 0.0039
-    - Level 2 (parabolic) Score: 0.0038
-    - Level 3 (bounce) Score: 0.1078
-  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.0633
-Profile for CNN complete.
-
---- Profiling Zarvan ---
-Running static tests...
-  > Parameter_Score calculated: 0.8586
-  > Scalability_Score calculated: 0.8004
-Running probe training and evaluation...
-  > Memory Accuracy per Repetition Level: {1: 1.0, 2: 1.0, 3: 1.0, 5: 1.0, 8: 1.0}
-  > Memory_Score (Weighted) calculated: 1.0000
-  > Reasoning Accuracy per Difficulty Level: {1: 0.5732, 2: 0.5078, 3: 0.3746}
-  > Reasoning_Score (Weighted) calculated: 0.1947
-  > Generalization_Score calculated: 1.0000
-  > Robustness Score per Noise Level:
-    - Noise 5%: 0.9094
-    - Noise 15%: 0.9074
-    - Noise 30%: 0.9023
-  > Learning_Headroom calculated: 0.5024
-  > Interpretability_Score calculated: 0.9533
-Running advanced probes...
-  > Uncertainty_Score calculated: 0.9403
-  > Continual_Learning_Score calculated: 0.7568
-Running Image IQ Probes...
-  > Calculating Spatial Focus Score...
-    - Level 1 (easy) Score: 0.1576
-    - Level 2 (medium) Score: 0.0600
-    - Level 3 (hard) Score: 0.0545
-  > Final Spatial_Focus_Score (Weighted) calculated: 0.0708
-  > Calculating Pattern Invariance Score...
-    - Level 1 (translation) Accuracy: 0.4453
-    - Level 2 (scale) Accuracy: 0.5469
-    - Level 3 (rotation) Accuracy: 0.4219
-  > Final Pattern_Invariance_Score (Weighted) calculated: 0.4609
-Running Audio IQ Probes...
-  > Calculating Frequency Detection Score...
-    - Level 1 (easy) Accuracy: 0.2422
-    - Level 2 (medium) Accuracy: 0.2656
-    - Level 3 (hard) Accuracy: 0.2422
-  > Final Frequency_Detection_Score (Weighted) calculated: 0.2489
-  > Calculating Rhythm Comprehension Score...
-    - Level 1 (easy) Accuracy: 0.3203
-    - Level 2 (medium) Accuracy: 0.3359
-    - Level 3 (hard) Accuracy: 0.3438
-  > Final Rhythm_Comprehension_Score (Weighted) calculated: 0.3382
-Running Video IQ Probes...
-  > Calculating Trajectory Prediction Score...
-    - Level 1 (linear) Score: 0.0013
-    - Level 2 (parabolic) Score: 0.0012
-    - Level 3 (bounce) Score: 0.0645
-  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.0374
-Profile for Zarvan complete.
+    - Level 1 (linear) Score: 0.5817
+    - Level 2 (parabolic) Score: 0.7794
+    - Level 3 (bounce) Score: 0.5734
+  > Final Trajectory_Prediction_Score (Weighted) calculated: 0.6334
+Profile for CNN_1D complete.
 
 
-==================== FINAL IQ-NET v2+ EXPANDED REPORT ====================
-| Metric                      |   Zarvan |   Transformer |    LSTM |     GRU |     CNN |     TCN |
-|:----------------------------|---------:|--------------:|--------:|--------:|--------:|--------:|
-| Parameter_Score             |   0.8586 |        0.9311 |  0.807  |  0.8466 |  0.9245 |  0.841  |
-| Scalability_Score           |   0.8004 |        0.6154 |  0.5825 |  0.5859 |  0.9221 |  0.7876 |
-| Memory_Score                |   1      |        1      |  0.9842 |  0.9928 |  0.9903 |  0.9969 |
-| Reasoning_Score             |   0.1947 |        0.2991 |  0.6141 |  0.812  |  0.1462 |  0.2019 |
-| Generalization_Score        |   1      |        1      |  0.9817 |  0.9908 |  0.99   |  0.9958 |
-| Robustness_Score            |   0.9052 |        0.8869 |  0.2713 |  0.1691 |  0.4526 |  0.4531 |
-| Learning_Headroom           |   0.5024 |        0.4961 |  0.581  |  0.5581 |  0.5111 |  0.5462 |
-| Interpretability_Score      |   0.9533 |        0.9606 |  0.2403 |  0.2403 |  0      |  0.4792 |
-| Uncertainty_Score           |   0.9403 |        0.9306 |  0.9992 |  0.9978 |  0.9967 |  0.9793 |
-| Continual_Learning_Score    |   0.7568 |        0.7222 |  0.8421 |  0.7455 |  0.9268 |  0.8421 |
-| Spatial_Focus_Score         |   0.0708 |        0.0417 |  0.0738 |  0.0743 |  0.0727 |  0.0728 |
-| Pattern_Invariance_Score    |   0.4609 |        0.4609 |  0      |  0      |  0      |  0      |
-| Frequency_Detection_Score   |   0.2489 |        0.3192 |  0.2199 |  0.2377 |  0.25   |  0      |
-| Rhythm_Comprehension_Score  |   0.3382 |        0.2578 |  0.4263 |  0      |  0.3304 |  0      |
-| Trajectory_Prediction_Score |   0.0374 |        0.0355 |  0.0634 |  0.0484 |  0.0633 |  0.0498 |
-| Final_IQ_Score              |  55.406  |       55.2572 | 50.4246 | 49.389  | 46.7038 | 43.5912 |
+==================== FINAL IQ-NET EXPANDED REPORT ====================
+| Metric                      |   Zarvan |   Transformer |     GRU |    LSTM |   CNN_1D |
+|:----------------------------|---------:|--------------:|--------:|--------:|---------:|
+| Parameter_Score             |   0.8892 |        0.9311 |  0.8407 |  0.8017 |   0.9497 |
+| Scalability_Score           |   0.9582 |        0.9857 |  0.9927 |  0.9931 |   0.9925 |
+| Memory_Score                |   1      |        1      |  0.9808 |  0.9586 |   0.8111 |
+| Reasoning_Score             |   0.7502 |        0.3388 |  0.6967 |  0.5434 |   0.137  |
+| Generalization_Score        |   1      |        1      |  0.9825 |  0.9608 |   0.8042 |
+| Robustness_Score            |   0.7631 |        0.8914 |  0.2427 |  0.3013 |   0.3822 |
+| Learning_Headroom           |   0.5252 |        0.5126 |  0.5374 |  0.5977 |   0.5265 |
+| Interpretability_Score      |   0.9617 |        0.9872 |  0.5054 |  0.2403 |   0.9983 |
+| Uncertainty_Score           |   0.9196 |        0.9473 |  0.9983 |  0.999  |   0.9966 |
+| Continual_Learning_Score    |   0.8125 |        0.7027 |  1      |  0.9211 |   0.68   |
+| Spatial_Focus_Score         |   0.5261 |        0.5064 |  0.4938 |  0.4947 |   0.5163 |
+| Pattern_Invariance_Score    |   0.5681 |        0.5402 |  0.4777 |  0.5145 |   0.529  |
+| Frequency_Detection_Score   |   0.9911 |        0.7232 |  0.2746 |  0.2701 |   0.7065 |
+| Rhythm_Comprehension_Score  |   0.9777 |        0.6674 |  0.3069 |  0.3393 |   0.6518 |
+| Trajectory_Prediction_Score |   0.6088 |        0.6088 |  0.6367 |  0.6248 |   0.6334 |
+| Final_IQ_Score              |  81.7695 |       72.437  | 65.8021 | 62.8716 |  62.7535 |
 Individual radar chart saved to 'iq_profile_zarvan.png'
 Individual radar chart saved to 'iq_profile_transformer.png'
-Individual radar chart saved to 'iq_profile_lstm.png'
 Individual radar chart saved to 'iq_profile_gru.png'
-Individual radar chart saved to 'iq_profile_cnn.png'
-Individual radar chart saved to 'iq_profile_tcn.png'
+Individual radar chart saved to 'iq_profile_lstm.png'
+Individual radar chart saved to 'iq_profile_cnn_1d.png'
 
-Radar chart saved to 'iq_net_radar_comparison.png'
+Combined radar chart saved to 'iq_net_radar_comparison.png'
