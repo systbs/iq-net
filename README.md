@@ -107,8 +107,8 @@ The models are ranked by their **Final IQ Score**, a weighted average of all 19 
 | **Energy_Envelope_Score** | **1.0000** | **1.0000** | 0.9821 | 0.9408 | 0.9475 |
 | **Prosody_Detection_Score** | **0.9821** | 0.9152 | 0.9330 | 0.9241 | 0.7946 |
 | **Formant_Dynamics_Score** | **1.0000** | **1.0000** | **1.0000** | **1.0000** | **1.0000** |
-| **Trajectory_Prediction_Score** | 0.6281 | 0.6262 | 0.6266 | **0.6297** | 0.6171 |
-| **Final_IQ_Score** | **86.97** | 81.74 | 81.24 | 79.65 | 67.59 |
+| **Trajectory_Prediction_Score** | 0.4331 | 0.3623 | **0.4360** | 0.3812 | 0.3928 |
+| **Final_IQ_Score** | **85.75** | 80.09 | 80.04 | 78.09 | 66.19 |
 
 ### Key Insights:
 
