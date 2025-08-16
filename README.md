@@ -119,15 +119,14 @@ The models are ranked by their **Final IQ Score**, a weighted average of all 19 
 
 ### Individual & Combined Model Profiles
 
-*(To display these images, create a folder named `images` in your repository's root directory and place the generated PNG files there.)*
 
 | Zarvan Profile | Transformer Profile | GRU Profile |
 | :---: | :---: | :---: |
-| ![Zarvan Profile](./images/iq_profile_zarvan.jpg) | ![Transformer Profile](./images/iq_profile_transformer.jpg) | ![GRU Profile](./images/iq_profile_gru.jpg) |
+| ![Zarvan Profile](./image/iq_profile_zarvan.jpg) | ![Transformer Profile](./image/iq_profile_transformer.jpg) | ![GRU Profile](./image/iq_profile_gru.jpg) |
 
 | LSTM Profile | CNN_1D Profile | Combined Comparison |
 | :---: | :---: | :---: |
-| ![LSTM Profile](./images/iq_profile_lstm.jpg) | ![CNN_1D Profile](./images/iq_profile_cnn_1d.jpg) | ![Combined Profile](./images/iq_net_radar_comparison.jpg) |
+| ![LSTM Profile](./image/iq_profile_lstm.jpg) | ![CNN_1D Profile](./image/iq_profile_cnn_1d.jpg) | ![Combined Profile](./image/iq_net_radar_comparison.jpg) |
 
 ## Methodology
 
