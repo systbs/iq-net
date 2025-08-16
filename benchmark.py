@@ -1472,10 +1472,11 @@ class HolisticAptitudeProfiler:
                 cls_sequence = cls_tokens_per_frame.view(batch_size_B_eff, T, -1) # [batch_size_B, T, E]
                 
                 # 5. Aggregate sequence information
-                video_feature = temp_video_model(cls_sequence) # [batch_size_B, E]
+                model_output_features = temp_model(x=None, embeds=cls_sequence, return_features=True)
+                video_feature = model_output_features.mean(dim=1) 
                 
                 # 6. Predict final coordinates
-                predicted_coords = torch.sigmoid(temp_regression_head(video_feature)) # [batch_size_B, 2]
+                predicted_coords = temp_regression_head(video_feature) # [batch_size_B, 2]
                 
                 # 7. Calculate loss
                 loss = loss_fn(predicted_coords, batch_coords) # [batch_size_B, 2] vs [batch_size_B, 2]
