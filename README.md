@@ -112,10 +112,10 @@ The models are ranked by their **Final IQ Score**, a weighted average of all 19 
 
 ### Key Insights:
 
--   [cite_start]**Zarvan** is the definitive top performer with a **Final IQ Score of 93.05**[cite: 55]. [cite_start]It showcases a uniquely balanced and powerful profile, achieving perfect scores in multiple domains and now demonstrating elite **spatiotemporal reasoning** with the highest score in Trajectory Prediction[cite: 54]. This solidifies its status as a premier all-rounder architecture.
--   [cite_start]**Transformer** proves to be a powerful and robust generalist, securing the second-highest IQ score[cite: 55]. [cite_start]It excels in Robustness and Interpretability [cite: 36, 38] [cite_start]and shows strong performance in video processing[cite: 54], making it a reliable choice for a wide range of tasks.
--   **GRU and LSTM** reaffirm their strength as stateful processing specialists. [cite_start]Their high Reasoning scores [cite: 33] [cite_start]are now complemented by very strong Trajectory Prediction scores[cite: 54], validating that their recurrent nature is highly effective for temporal tasks when paired with a proper perception module.
--   [cite_start]**CNN_1D** is the most parameter-efficient model but shows clear limitations in reasoning and interpretability[cite: 29, 33, 38]. [cite_start]However, its respectable score on the new, more complex video probe [cite: 54] indicates that even simple architectures can perform well with a well-designed evaluation framework.
+-   **Zarvan** is the definitive top performer with a **Final IQ Score of 93.05**. It showcases a uniquely balanced and powerful profile, achieving perfect scores in multiple domains and now demonstrating elite **spatiotemporal reasoning** with the highest score in Trajectory Prediction. This solidifies its status as a premier all-rounder architecture.
+-   **Transformer** proves to be a powerful and robust generalist, securing the second-highest IQ score. It excels in Robustness and Interpretability and shows strong performance in video processing, making it a reliable choice for a wide range of tasks.
+-   **GRU and LSTM** reaffirm their strength as stateful processing specialists. Their high Reasoning scores are now complemented by very strong Trajectory Prediction scores, validating that their recurrent nature is highly effective for temporal tasks when paired with a proper perception module.
+-   **CNN_1D** is the most parameter-efficient model but shows clear limitations in reasoning and interpretability. However, its respectable score on the new, more complex video probe indicates that even simple architectures can perform well with a well-designed evaluation framework.
 ### Individual & Combined Model Profiles
 
 
