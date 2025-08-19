@@ -31,6 +31,7 @@ import copy
 from torch.utils.data import DataLoader, TensorDataset
 import matplotlib.pyplot as plt
 from math import pi
+from scipy import signal
 
 # ===========================================
 # 0. Reproducibility & Configuration
@@ -134,7 +135,7 @@ class _HolisticExtractor(nn.Module):
         self.head_dim = embed_dim // num_heads
         self.s_proj = nn.Linear(embed_dim, embed_dim)
         self.v_proj = nn.Linear(embed_dim, embed_dim)
-        self.combine = nn.Linear(embed_dim, embed_dim)
+        self.filter = nn.Linear(embed_dim, embed_dim)
 
     def forward(self, x):
         B, S, E = x.shape
@@ -143,7 +144,7 @@ class _HolisticExtractor(nn.Module):
         v = v.view(B, S, self.num_heads, self.head_dim).permute(0, 2, 1, 3)
         weights = F.softmax(s, dim=2)
         head_outputs = torch.sum(weights * v, dim=2, keepdim=True)
-        return self.combine(head_outputs.reshape(B, 1, E))
+        return self.filter(head_outputs.reshape(B, 1, E))
 
 # --- Associative ---
 class _AssociativeExtractor(nn.Module):
@@ -178,36 +179,44 @@ class _SequentialExtractor(nn.Module):
         phases = torch.cat([torch.cos(omega), torch.sin(omega)], dim=-1)
         return self.out_proj(phases)
 
+    
 # --- Zarvan Block ---
 class _ZarvanBlock(nn.Module):
     def __init__(self, embed_dim, hidden_dim, num_heads):
         super().__init__()
+        
         self.input_adapter = nn.Sequential(
             nn.Linear(embed_dim, embed_dim),
             nn.GELU(),
             nn.LayerNorm(embed_dim)
         )
+        
         self.holistic_ctx = _HolisticExtractor(embed_dim, num_heads)
         self.associative_ctx = _AssociativeExtractor(embed_dim)
         self.sequential_ctx = _SequentialExtractor(embed_dim)
+        
         self.expert_gate = nn.Sequential(
             nn.Linear(embed_dim, 3),
             nn.SiLU()
         )
+        
         self.ffn = nn.Sequential(
             nn.Linear(embed_dim, hidden_dim),
             nn.GELU(),
             nn.Linear(hidden_dim, embed_dim)
         )
+        
         self.norm = nn.LayerNorm(embed_dim)
 
     def forward(self, x):
         B, S, E = x.shape
         x_residual = x
         x_adapted = self.input_adapter(x)
+        
         q_holistic = self.holistic_ctx(x_adapted)
         q_associative = self.associative_ctx(x_adapted)
         q_sequential = self.sequential_ctx(x_adapted)
+
         gates = self.expert_gate(x_adapted)
         g_h, g_a, g_s = gates.chunk(3, dim=-1)
         h_candidate = (
@@ -215,6 +224,7 @@ class _ZarvanBlock(nn.Module):
             g_a * q_associative.expand(-1, S, -1) +
             g_s * q_sequential
         )
+        
         out = x_residual + self.ffn(self.norm(h_candidate))
         return out
 
@@ -248,7 +258,6 @@ class ZarvanModel(nn.Module):
             return h
         return self.output_head(h)
 
-# --- LSTM Model ---
 # --- LSTM Model ---
 class LSTMModel(nn.Module):
     def __init__(self, config):
@@ -680,7 +689,7 @@ class HolisticAptitudeProfiler:
             # --- 4. Training Loop for this specific probe ---
             temp_image_head.train()
             temp_regression_head.train()
-            num_training_steps = 200 # Increased steps
+            num_training_steps = 1000 # Increased steps
             loss_fn = nn.MSELoss() # Use MSE for regression
             for step in range(num_training_steps):
                  # Sample a batch
@@ -784,7 +793,7 @@ class HolisticAptitudeProfiler:
             # --- 4. Training Loop ---
             temp_image_head.train()
             temp_classification_head.train()
-            num_training_steps = 200 # Increased steps
+            num_training_steps = 1000 # Increased steps
             dataset_train = TensorDataset(images, labels)
             loader_train = DataLoader(dataset_train, batch_size=self.benchmark_config['batch_size'], shuffle=True)
             
@@ -1436,7 +1445,7 @@ class HolisticAptitudeProfiler:
             temp_image_head.train()
             temp_video_model.train()
             temp_regression_head.train()
-            num_training_steps = 200 
+            num_training_steps = 1000 
             
             # Instead of a DataLoader with mismatched tensors, we iterate directly
             # or use a DataLoader for the video indices.
