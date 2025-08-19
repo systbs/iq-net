@@ -90,7 +90,7 @@ The models are ranked by their **Final IQ Score**, a weighted average of all 19 
 | Metric | Zarvan | Transformer | GRU | LSTM | CNN_1D |
 |:---|---:|---:|---:|---:|---:|
 | **Parameter_Score** | 0.7079 | 0.8242 | 0.8249 | 0.7823 | **0.9403** |
-| **Scalability_Score** | 0.9545 | 0.9846 | 0.9928 | 0.9924 | **0.9932** |
+| **Scalability_Score** | 0.9556 | 0.9846 | 0.9924 | 0.9926 | **0.9929** |
 | **Memory_Score** | **1.0000** | **1.0000** | 0.9981 | 0.9933 | 0.9036 |
 | **Reasoning_Score** | 0.9713 | 0.5181 | **0.9797** | 0.8076 | 0.1413 |
 | **Generalization_Score** | **1.0000** | **1.0000** | 0.9983 | 0.9942 | 0.9008 |
@@ -107,19 +107,15 @@ The models are ranked by their **Final IQ Score**, a weighted average of all 19 
 | **Energy_Envelope_Score**| **1.0000** | **1.0000** | 0.9509 | 0.9330 | 0.9297 |
 | **Prosody_Detection_Score**| **0.9821** | 0.9196 | 0.9375 | 0.9286 | 0.7857 |
 | **Formant_Dynamics_Score**| **1.0000** | **1.0000** | **1.0000** | **1.0000** | **1.0000** |
-| **Trajectory_Prediction_Score**| 0.4356 | 0.3653 | **0.4368** | 0.3874 | 0.3918 |
-| **Final_IQ_Score** | **89.95** | 83.01 | 81.86 | 80.73 | 66.93 |
+| **Trajectory_Prediction_Score**| **0.9316** | 0.9157 | 0.8987 | 0.8924 | 0.8452 |
+| **Final_IQ_Score** | **93.05** | 86.45 | 84.74 | 83.89 | 69.76 |
 
 ### Key Insights:
 
--  **Zarvan** is the definitive top performer with a Final IQ Score of **89.95**. It showcases a uniquely balanced profile, now excelling not only in Memory, Generalization, and audio tasks but also achieving the highest scores in visual probes (Spatial Focus and Pattern Invariance). This demonstrates its powerful and versatile multi-domain capabilities.
-
--  **GRU** emerges as a reasoning specialist, achieving the highest Reasoning Score (**0.9797**) and a perfect score in Continual Learning. However, this comes at the cost of extremely poor robustness.
-
--  **Transformer** is a robust generalist, achieving the highest Robustness Score (**0.8238**) and perfect Memory/Generalization. Its main trade-off is a significantly lower aptitude for algorithmic reasoning compared to Zarvan and the RNNs.
-
--  **CNN_1D** has a highly specialized profile. It is the most parameter-efficient model (**0.9403**) but is fundamentally incapable of algorithmic reasoning (**0.1413**) and has zero interpretability according to the probe, making it a "black box" despite its simplicity.
-
+-   [cite_start]**Zarvan** is the definitive top performer with a **Final IQ Score of 93.05**[cite: 55]. [cite_start]It showcases a uniquely balanced and powerful profile, achieving perfect scores in multiple domains and now demonstrating elite **spatiotemporal reasoning** with the highest score in Trajectory Prediction[cite: 54]. This solidifies its status as a premier all-rounder architecture.
+-   [cite_start]**Transformer** proves to be a powerful and robust generalist, securing the second-highest IQ score[cite: 55]. [cite_start]It excels in Robustness and Interpretability [cite: 36, 38] [cite_start]and shows strong performance in video processing[cite: 54], making it a reliable choice for a wide range of tasks.
+-   **GRU and LSTM** reaffirm their strength as stateful processing specialists. [cite_start]Their high Reasoning scores [cite: 33] [cite_start]are now complemented by very strong Trajectory Prediction scores[cite: 54], validating that their recurrent nature is highly effective for temporal tasks when paired with a proper perception module.
+-   [cite_start]**CNN_1D** is the most parameter-efficient model but shows clear limitations in reasoning and interpretability[cite: 29, 33, 38]. [cite_start]However, its respectable score on the new, more complex video probe [cite: 54] indicates that even simple architectures can perform well with a well-designed evaluation framework.
 ### Individual & Combined Model Profiles
 
 
