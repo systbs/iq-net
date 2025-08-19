@@ -90,32 +90,35 @@ The models are ranked by their **Final IQ Score**, a weighted average of all 19 
 | Metric | Zarvan | Transformer | GRU | LSTM | CNN_1D |
 |:---|---:|---:|---:|---:|---:|
 | **Parameter_Score** | 0.7079 | 0.8242 | 0.8249 | 0.7823 | **0.9403** |
-| **Scalability_Score** | 0.9577 | 0.9856 | 0.9932 | **0.9932** | 0.9930 |
+| **Scalability_Score** | 0.9545 | 0.9846 | 0.9928 | 0.9924 | **0.9932** |
 | **Memory_Score** | **1.0000** | **1.0000** | 0.9981 | 0.9933 | 0.9036 |
 | **Reasoning_Score** | 0.9713 | 0.5181 | **0.9797** | 0.8076 | 0.1413 |
 | **Generalization_Score** | **1.0000** | **1.0000** | 0.9983 | 0.9942 | 0.9008 |
 | **Robustness_Score** | 0.8094 | **0.8238** | 0.0672 | 0.1732 | 0.4586 |
 | **Learning_Headroom** | 0.4884 | 0.5238 | **0.5741** | 0.5642 | 0.5471 |
-| **Interpretability_Score** | 0.9705 | **0.9776** | 0.2517 | 0.3631 | 0.0000 |
-| **Uncertainty_Score** | 0.9039 | 0.9126 | 0.9985 | **0.9994** | 0.9820 |
-| **Continual_Learning_Score** | 0.8125 | 0.9286 | **1.0000** | **1.0000** | 0.8163 |
-| **Spatial_Focus_Score** | 0.5500 | 0.5383 | 0.5387 | **0.5906** | 0.5007 |
-| **Pattern_Invariance_Score** | **0.5949** | 0.5681 | 0.5402 | 0.5257 | 0.4754 |
-| **Frequency_Detection_Score** | **1.0000** | 0.9955 | 0.9955 | 0.9464 | 0.8638 |
-| **Rhythm_Comprehension_Score** | **1.0000** | 0.9643 | **1.0000** | **1.0000** | 0.8661 |
-| **Texture_Detection_Score** | **1.0000** | **1.0000** | **1.0000** | **1.0000** | 0.9554 |
-| **Energy_Envelope_Score** | **1.0000** | **1.0000** | 0.9821 | 0.9408 | 0.9475 |
-| **Prosody_Detection_Score** | **0.9821** | 0.9152 | 0.9330 | 0.9241 | 0.7946 |
-| **Formant_Dynamics_Score** | **1.0000** | **1.0000** | **1.0000** | **1.0000** | **1.0000** |
-| **Trajectory_Prediction_Score** | 0.4331 | 0.3623 | **0.4360** | 0.3812 | 0.3928 |
-| **Final_IQ_Score** | **85.75** | 80.09 | 80.04 | 78.09 | 66.19 |
+| **Interpretability_Score**| 0.9705 | **0.9776** | 0.2517 | 0.3631 | 0.0000 |
+| **Uncertainty_Score** | 0.9039 | 0.9126 | 0.9985 | **0.9994** | 0.9982 |
+| **Continual_Learning_Score**| 0.8125 | 0.9286 | **1.0000** | **1.0000** | 0.8163 |
+| **Spatial_Focus_Score** | **0.8783** | 0.7642 | 0.8200 | 0.7757 | 0.5422 |
+| **Pattern_Invariance_Score**| **0.9386** | 0.8036 | 0.5703 | 0.7132 | 0.5513 |
+| **Frequency_Detection_Score**| **1.0000** | 0.9955 | 0.9866 | 0.9911 | 0.8527 |
+| **Rhythm_Comprehension_Score**| **1.0000** | 0.9643 | **1.0000** | **1.0000** | 0.8795 |
+| **Texture_Detection_Score**| **1.0000** | **1.0000** | **1.0000** | **1.0000** | 0.9821 |
+| **Energy_Envelope_Score**| **1.0000** | **1.0000** | 0.9509 | 0.9330 | 0.9297 |
+| **Prosody_Detection_Score**| **0.9821** | 0.9196 | 0.9375 | 0.9286 | 0.7857 |
+| **Formant_Dynamics_Score**| **1.0000** | **1.0000** | **1.0000** | **1.0000** | **1.0000** |
+| **Trajectory_Prediction_Score**| 0.4356 | 0.3653 | **0.4368** | 0.3874 | 0.3918 |
+| **Final_IQ_Score** | **89.95** | 83.01 | 81.86 | 80.73 | 66.93 |
 
 ### Key Insights:
 
--   **Zarvan** is the definitive top performer with a **Final IQ Score of 86.97**. It showcases a uniquely balanced profile, achieving perfect scores in Memory, Generalization, and most audio tasks while maintaining top-tier performance in algorithmic Reasoning.
--   **GRU** emerges as a reasoning specialist, achieving the highest **Reasoning Score (0.9797)** and a perfect score in **Continual Learning**. However, this comes at the cost of extremely poor robustness.
--   **Transformer** is a robust generalist, achieving the highest **Robustness Score (0.8238)** and perfect Memory/Generalization. Its main trade-off is a significantly lower aptitude for algorithmic reasoning compared to Zarvan and the RNNs.
--   **CNN_1D** has a highly specialized profile. It is the most parameter-efficient model (**0.9403**) but is fundamentally incapable of algorithmic reasoning (**0.1413**) and has zero interpretability according to the probe, making it a "black box" despite its simplicity.
+-  **Zarvan** is the definitive top performer with a Final IQ Score of **89.95**. It showcases a uniquely balanced profile, now excelling not only in Memory, Generalization, and audio tasks but also achieving the highest scores in visual probes (Spatial Focus and Pattern Invariance). This demonstrates its powerful and versatile multi-domain capabilities.
+
+-  **GRU** emerges as a reasoning specialist, achieving the highest Reasoning Score (**0.9797**) and a perfect score in Continual Learning. However, this comes at the cost of extremely poor robustness.
+
+-  **Transformer** is a robust generalist, achieving the highest Robustness Score (**0.8238**) and perfect Memory/Generalization. Its main trade-off is a significantly lower aptitude for algorithmic reasoning compared to Zarvan and the RNNs.
+
+-  **CNN_1D** has a highly specialized profile. It is the most parameter-efficient model (**0.9403**) but is fundamentally incapable of algorithmic reasoning (**0.1413**) and has zero interpretability according to the probe, making it a "black box" despite its simplicity.
 
 ### Individual & Combined Model Profiles
 
