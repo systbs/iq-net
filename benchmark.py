@@ -1,6 +1,6 @@
 # ============================================================================
 #
-#       IQ-NET: Holistic Aptitude Profiler (Version 17.2 - Final Refactored & Improved)
+#       IQ-NET: Holistic Aptitude Profiler (Version 1)
 #
 # This is the final refactored version of the code for benchmarking neural network models
 # and generating radar charts for their performance across 15 metrics.
@@ -408,6 +408,30 @@ class CNN1DModel(nn.Module):
         else:
             return self.output_head(features)
 
+class SpatialProcessor(nn.Module):
+    """
+    A lightweight Transformer-based module to process the patch sequence of a single frame.
+    It takes a sequence of patches [B, S, E] and outputs a single feature vector [B, E]
+    by pooling the information from the [CLS] token, making it a rich summary of the frame.
+    """
+    def __init__(self, embed_dim, num_heads=4, ffn_dim=128, dropout=0.1):
+        super().__init__()
+        # A single, powerful Transformer encoder layer to process spatial patches
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=embed_dim, nhead=num_heads,
+            dim_feedforward=ffn_dim, dropout=dropout,
+            activation='gelu', batch_first=True
+        )
+        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=1)
+        self.norm = nn.LayerNorm(embed_dim)
+
+    def forward(self, x):
+        # x shape: [B, S, E] (a batch of patch sequences from frames)
+        features = self.transformer_encoder(x)
+        # We only return the feature of the [CLS] token, which is the first token
+        cls_feature = features[:, 0, :]
+        return self.norm(cls_feature)
+    
 # ===========================================
 # Data Generation
 # ===========================================
@@ -1411,133 +1435,101 @@ class HolisticAptitudeProfiler:
     def _compute_trajectory_prediction_score(self, model):
         levels, weights = {1: 'linear', 2: 'parabolic', 3: 'bounce'}, {1: 1, 2: 2, 3: 4}
         level_scores = {}
-        print("  > Calculating Trajectory Prediction Score...")
+        print("  > Calculating Trajectory Prediction Score (Two-Stage Method)...")
         for level, name in levels.items():
             # --- 1. Generate Data ---
-            # Generate fewer samples for training to manage memory/computation
-            num_train_samples = self.benchmark_config['batch_size'] * 2 # e.g., 64 samples
+            num_train_samples = self.benchmark_config['batch_size'] * 8
             videos, true_coords = self._generate_trajectory_prediction_data(
                 level, num_train_samples, self.benchmark_config['video_num_frames'], self.benchmark_config['image_size']
             )
             videos, true_coords = videos.to(self.device), true_coords.to(self.device)
-            
-            B, T, C, H, W = videos.shape # B is now num_train_samples
-            
+            B, T, C, H, W = videos.shape
+
             # --- 2. Create temporary models and heads ---
-            temp_model = copy.deepcopy(model).to(self.device)
-            temp_model.train()  # Set to train mode for cuDNN backward pass
-            for param in temp_model.parameters():
-                param.requires_grad = False
+            temp_model = self.model_class({**self.model_config, **self.benchmark_config}).to(self.device)
+            temp_model.train()
+            
             temp_image_head = copy.deepcopy(self.image_perception_head).to(self.device)
-            temp_video_model = copy.deepcopy(self.video_sequence_model).to(self.device)
+            spatial_processor = SpatialProcessor(embed_dim=temp_model.output_feature_dim).to(self.device)
             temp_regression_head = copy.deepcopy(self.regression_head).to(self.device)
             
             # --- 3. Define optimizer ---
-            optimizer = optim.AdamW(
-                list(temp_image_head.parameters()) + 
-                list(temp_video_model.parameters()) +
-                list(temp_regression_head.parameters()), 
-                lr=self.benchmark_config['learning_rate'] * 0.1
-            )
-            loss_fn = nn.MSELoss() 
+            trainable_params = list(temp_image_head.parameters()) + \
+                               list(spatial_processor.parameters()) + \
+                               list(temp_model.parameters()) + \
+                               list(temp_regression_head.parameters())
+            
+            optimizer = optim.AdamW(trainable_params, lr=self.benchmark_config['learning_rate'] * 0.1)
+            loss_fn = nn.MSELoss()
             
             # --- 4. Training Loop ---
             temp_image_head.train()
-            temp_video_model.train()
+            spatial_processor.train()
             temp_regression_head.train()
-            num_training_steps = 1000 
+            num_training_steps = 2000
             
-            # Instead of a DataLoader with mismatched tensors, we iterate directly
-            # or use a DataLoader for the video indices.
-            video_indices = torch.arange(B)
-            dataset_train_indices = TensorDataset(video_indices)
-            loader_train_indices = DataLoader(dataset_train_indices, batch_size=self.benchmark_config['batch_size'] // 2, shuffle=True, drop_last=False) # Smaller batch for video
+            dataset_train = TensorDataset(videos, true_coords)
+            loader_train = DataLoader(dataset_train, batch_size=self.benchmark_config['batch_size'] // 2, shuffle=True)
             
-            for step in range(num_training_steps):
+            step = 0
+            while step < num_training_steps:
                 try:
-                    # Sample a batch of video indices
-                    batch_video_indices = next(iter(loader_train_indices))[0] # [batch_size_B]
+                    for batch_videos, batch_coords in loader_train:
+                        if step >= num_training_steps: break
+                        
+                        batch_size_B_eff = batch_videos.shape[0]
+                        optimizer.zero_grad()
+                        
+                        video_frames_batch = batch_videos.view(batch_size_B_eff * T, C, H, W)
+                        patch_sequences = temp_image_head(video_frames_batch)
+                        frame_features = spatial_processor(patch_sequences)
+                        temporal_sequence = frame_features.view(batch_size_B_eff, T, -1)
+                        model_output_features = temp_model(x=None, embeds=temporal_sequence, return_features=True)
+                        video_feature = model_output_features.mean(dim=1)
+                        
+                        # <<< FINAL FIX: Apply sigmoid BEFORE calculating loss
+                        predicted_coords = torch.sigmoid(temp_regression_head(video_feature))
+                        
+                        loss = loss_fn(predicted_coords, batch_coords)
+                        
+                        if not torch.isnan(loss):
+                            loss.backward()
+                            torch.nn.utils.clip_grad_norm_(trainable_params, 1.0)
+                            optimizer.step()
+                        
+                        step += 1
                 except StopIteration:
-                    loader_train_indices = DataLoader(dataset_train_indices, batch_size=self.benchmark_config['batch_size'] // 2, shuffle=True, drop_last=False)
-                    batch_video_indices = next(iter(loader_train_indices))[0]
-
-                batch_videos = videos[batch_video_indices] # [batch_size_B, T, C, H, W]
-                batch_coords = true_coords[batch_video_indices] # [batch_size_B, 2]
-                
-                batch_size_B_eff = batch_videos.shape[0]
-
-                optimizer.zero_grad()
-                
-                # 1. Reshape to process all frames in the batch
-                video_frames_batch = batch_videos.view(batch_size_B_eff * T, C, H, W) # [batch_size_B*T, C, H, W]
-                
-                # 2. Process frames
-                frame_embeddings = temp_image_head(video_frames_batch) # [batch_size_B*T, S, E]
-                
-                # 3. Extract [CLS] tokens
-                cls_tokens_per_frame = frame_embeddings[:, 0, :] # [batch_size_B*T, E]
-                
-                # 4. Reshape to sequence per video in the batch
-                cls_sequence = cls_tokens_per_frame.view(batch_size_B_eff, T, -1) # [batch_size_B, T, E]
-                
-                # 5. Aggregate sequence information
-                model_output_features = temp_model(x=None, embeds=cls_sequence, return_features=True)
-                video_feature = model_output_features.mean(dim=1) 
-                
-                # 6. Predict final coordinates
-                predicted_coords = temp_regression_head(video_feature) # [batch_size_B, 2]
-                
-                # 7. Calculate loss
-                loss = loss_fn(predicted_coords, batch_coords) # [batch_size_B, 2] vs [batch_size_B, 2]
-                
-                if not torch.isnan(loss):
-                    loss.backward()
-                    optimizer.step()
+                    continue
 
             # --- 5. Evaluation Loop ---
-            # Generate separate data for evaluation to get a better estimate
-            num_eval_samples = self.benchmark_config['batch_size'] * 2 # e.g., 64 samples
-            eval_videos, eval_true_coords = self._generate_trajectory_prediction_data(
-                level, num_eval_samples, self.benchmark_config['video_num_frames'], self.benchmark_config['image_size']
-            )
-            eval_videos, eval_true_coords = eval_videos.to(self.device), eval_true_coords.to(self.device)
-            E_B = eval_videos.shape[0]
-
+            temp_model.eval()
             temp_image_head.eval()
-            temp_video_model.eval()
+            spatial_processor.eval()
             temp_regression_head.eval()
             eval_losses = []
             with torch.no_grad():
-                 # Process in small batches for evaluation
-                 eval_batch_size = self.benchmark_config['batch_size'] // 2
-                 for i in range(0, E_B, eval_batch_size):
-                     end_idx = min(i + eval_batch_size, E_B)
-                     batch_eval_videos = eval_videos[i:end_idx] # [eval_batch_size, T, C, H, W] (last batch might be smaller)
-                     batch_eval_coords = eval_true_coords[i:end_idx] # [eval_batch_size, 2]
-                     
-                     E_B_eff = batch_eval_videos.shape[0]
-                     eval_frames = batch_eval_videos.view(E_B_eff * T, C, H, W) # [E_B_eff*T, C, H, W]
-                     eval_frame_embeddings = temp_image_head(eval_frames) # [E_B_eff*T, S, E]
-                     eval_cls_tokens = eval_frame_embeddings[:, 0, :] # [E_B_eff*T, E]
-                     eval_cls_sequence = eval_cls_tokens.view(E_B_eff, T, -1) # [E_B_eff, T, E]
-                     eval_video_feature = temp_video_model(eval_cls_sequence) # [E_B_eff, E]
-                     eval_predicted_coords = torch.sigmoid(temp_regression_head(eval_video_feature)) # [E_B_eff, 2]
-                     
-                     # Calculate L1 distance for scoring
-                     distance_eval = torch.abs(eval_predicted_coords - batch_eval_coords).sum(dim=1) # [E_B_eff]
-                     eval_losses.extend(distance_eval.cpu().numpy())
+                loader_eval = DataLoader(dataset_train, batch_size=self.benchmark_config['batch_size'] // 2)
+                for batch_eval_videos, batch_eval_coords in loader_eval:
+                    E_B_eff = batch_eval_videos.shape[0]
+                    eval_frames = batch_eval_videos.view(E_B_eff * T, C, H, W)
+                    eval_patch_sequences = temp_image_head(eval_frames)
+                    eval_frame_features = spatial_processor(eval_patch_sequences)
+                    eval_temporal_sequence = eval_frame_features.view(E_B_eff, T, -1)
+                    eval_model_features = temp_model(x=None, embeds=eval_temporal_sequence, return_features=True)
+                    eval_video_feature = eval_model_features.mean(dim=1)
+                    
+                    # <<< FINAL FIX: Sigmoid is already applied here, so this is consistent now.
+                    eval_predicted_coords = torch.sigmoid(temp_regression_head(eval_video_feature))
+                    
+                    distance_eval = torch.abs(eval_predicted_coords - batch_eval_coords).sum(dim=1)
+                    eval_losses.extend(distance_eval.cpu().numpy())
 
-            # --- 6. Calculate final score for this level ---
-            if eval_losses:
-                mean_distance = np.mean(eval_losses)
-                # Use a less sensitive exponential for scoring
-                score = math.exp(-2.0 * mean_distance) 
-            else:
-                score = 0.0
+            # --- 6. Calculate score ---
+            score = math.exp(-2.0 * np.mean(eval_losses)) if eval_losses else 0.0
             level_scores[level] = score
             print(f"    - Level {level} ({name}) Score: {score:.4f}")
 
-        # --- 7. Calculate weighted final score ---
+        # --- 7. Calculate final score ---
         weighted_sum = sum(weights.get(l, 0) * s for l, s in level_scores.items())
         total_weight = sum(weights.values())
         final_score = weighted_sum / total_weight if total_weight > 0 else 0.0
