@@ -3,7 +3,7 @@
 #       IQ-NET: Holistic Aptitude Profiler (Version 1)
 #
 # This is the final refactored version of the code for benchmarking neural network models
-# and generating radar charts for their performance across 15 metrics.
+# and generating radar charts for their performance across 19 metrics.
 # It is designed for clarity, reproducibility, modularity, and GitHub presentation.
 # The radar charts visualize each model's profile using abbreviations:
 # RSN (Reasoning), MEM (Memory), SCL (Scalability), ROB (Robustness), GEN (Generalization),
@@ -2073,3 +2073,4 @@ if __name__ == '__main__':
     
     # Generate and save radar charts
     plot_radar_charts(report_df)
+
